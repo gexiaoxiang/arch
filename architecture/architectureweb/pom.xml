@@ -36,6 +36,24 @@
             <version>0.0.1-SNAPSHOT</version>
             <type>war</type>
         </dependency>
+        <dependency>
+            <groupId>com.eden</groupId>
+            <artifactId>cartmgr</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.eden</groupId>
+            <artifactId>storemgr</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.eden</groupId>
+            <artifactId>ordermgr</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
 
         <dependency>
             <groupId>junit</groupId>
@@ -64,6 +82,18 @@
                             <overlay>
                                 <groupId>com.eden</groupId>
                                 <artifactId>goodsmgrweb</artifactId>
+                            </overlay>
+                            <overlay>
+                                <groupId>com.eden</groupId>
+                                <artifactId>cartmgr</artifactId>
+                            </overlay>
+                            <overlay>
+                                <groupId>com.eden</groupId>
+                                <artifactId>ordermgr</artifactId>
+                            </overlay>
+                            <overlay>
+                                <groupId>com.eden</groupId>
+                                <artifactId>storemgr</artifactId>
                             </overlay>
 
                         </overlays>
