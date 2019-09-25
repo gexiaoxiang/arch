@@ -89,7 +89,7 @@
                             <contextPath>/</contextPath>
                         </webAppConfig>
                         <connectors>
-                            <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <connector implementation="orge.eclipse.jetty.server.nio.SelectChannelConnector">
                                 <port>9080</port>
                                 <maxIdleTime>60000</maxIdleTime>
                             </connector>
