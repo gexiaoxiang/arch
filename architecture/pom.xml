@@ -14,6 +14,7 @@
     <module>goodsmgr</module>
     <module>goodsmgrweb</module>
       <module>cartmgr</module>
+      <module>ordermgr</module>
   </modules>
   <packaging>pom</packaging>
 
