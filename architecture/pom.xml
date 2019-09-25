@@ -13,6 +13,7 @@
     <module>customerger</module>
     <module>goodsmgr</module>
     <module>goodsmgrweb</module>
+      <module>cartmgr</module>
   </modules>
   <packaging>pom</packaging>
 
