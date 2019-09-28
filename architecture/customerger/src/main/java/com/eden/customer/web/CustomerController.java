@@ -4,13 +4,12 @@ import com.eden.customer.service.ICustomerService;
 import com.eden.customer.vo.CustomerModel;
 import com.eden.customer.vo.CustomerQueryModel;
 import com.eden.pageutil.Page;
+import com.eden.util.format.DateFormatHelper;
+import com.eden.util.json.JsonHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/customer")
@@ -26,6 +25,7 @@ public class CustomerController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(@ModelAttribute("cm") CustomerModel cm) {
+        cm.setRegisterTime(DateFormatHelper.long2str(System.currentTimeMillis()));
 
         customerService.create(cm);
         return "customer/success";
@@ -55,7 +55,7 @@ public class CustomerController {
         return "customer/delete";
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.POST)
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
     public String post(@PathVariable("customerUuid") int customerUuid) {
 
         customerService.delete(customerUuid);
@@ -64,14 +64,24 @@ public class CustomerController {
 
 
     @RequestMapping(value = "toList", method = RequestMethod.GET)
-    public String toList(@PathVariable("queryJsonStr") String queryJson, @ModelAttribute("page")Page page) {
-
-        CustomerQueryModel cqm=null;
-        if(queryJson==null||queryJson.trim().length()==0){
-            cqm=new CustomerQueryModel();
-        }else {
-            
+    public String toList(@ModelAttribute("wm") CustomerWebModel wm, Model model) {
+        CustomerQueryModel cqm = null;
+        if (wm.getQueryJsonStr() == null || wm.getQueryJsonStr().trim().length() == 0) {
+            cqm = new CustomerQueryModel();
+        } else {
+            cqm = (CustomerQueryModel) JsonHelper.str2Object(wm.getQueryJsonStr(), CustomerQueryModel.class);
         }
+
+        cqm.getPage().setNowPage(wm.getNowPage());
+        if (wm.getPageShow() > 0) {
+            cqm.getPage().setPageShow(wm.getPageShow());
+        }
+
+        Page dbPage = customerService.getByConditionPage(cqm);
+
+        //
+        model.addAttribute("wm", wm);
+        model.addAttribute("page", dbPage);
 
         return "customer/list";
     }
