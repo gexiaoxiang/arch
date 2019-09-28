@@ -6,9 +6,10 @@ import com.eden.customer.vo.CustomerModel;
 import com.eden.customer.vo.CustomerQueryModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-
+@Transactional
 public class CustomerService extends BaseService<CustomerModel, CustomerQueryModel> implements  ICustomerService {
 
 
