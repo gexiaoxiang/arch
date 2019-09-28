@@ -1,20 +1,19 @@
 package com.eden.customer;
 
-import com.eden.customer.dao.CustomerDao;
+import com.eden.customer.service.ICustomerService;
 import com.eden.customer.vo.CustomerModel;
 import com.eden.customer.vo.CustomerQueryModel;
+import com.eden.pageutil.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class Client {
 
     @Autowired
-    private CustomerDao dao ;
+    private ICustomerService service;
 
     public static void main(String[] args) {
         ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -27,8 +26,13 @@ public class Client {
         cm.setTrueName("c1");
         cm.setTrueName("99");
 
-        t.dao.create(cm);
-        List<CustomerModel> byConditionPage = t.dao.getByConditionPage(new CustomerQueryModel());
+//        t.service.create(cm);
+        CustomerQueryModel customerQueryModel = new CustomerQueryModel();
+        customerQueryModel.getPage().setNowPage(1);
+        customerQueryModel.getPage().setPageShow(3);
+
+        Page<CustomerModel> byConditionPage = t.service.getByConditionPage(customerQueryModel);
+        System.out.println(customerQueryModel.getPage());
         System.out.println("list"+byConditionPage);
     }
 }

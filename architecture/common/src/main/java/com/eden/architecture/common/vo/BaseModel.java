@@ -2,7 +2,7 @@ package com.eden.architecture.common.vo;
 import com.eden.pageutil.*;
 
 public class BaseModel implements java.io.Serializable{
-	
+
 	private Integer uuid;
 	private Page page = new Page();
 
@@ -11,14 +11,14 @@ public class BaseModel implements java.io.Serializable{
 	}
 	public void setPage(Page page) {
 		this.page = page;
-	}	
+	}
 	public Integer getUuid() {
 		return uuid;
 	}
 	public void setUuid(Integer uuid) {
 		this.uuid = uuid;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -42,4 +42,5 @@ public class BaseModel implements java.io.Serializable{
 			return false;
 		return true;
 	}
+
 }
