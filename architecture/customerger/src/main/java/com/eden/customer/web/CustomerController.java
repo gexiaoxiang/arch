@@ -56,7 +56,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public String post(@PathVariable("customerUuid") int customerUuid) {
+    public String post(@RequestParam("uuid") int customerUuid) {
 
         customerService.delete(customerUuid);
         return "customer/success";
